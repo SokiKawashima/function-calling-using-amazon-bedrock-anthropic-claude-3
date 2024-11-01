@@ -1,16 +1,16 @@
-import boto3
-from tools.ticker import ticker_tool_description
-from tools.currency import currency_converter_tool_description
 from typing import Union
 
+import boto3
+from tools.currency import currency_converter_tool_description
+from tools.ticker import ticker_tool_description
 
 bedrock_client = boto3.client("bedrock-runtime", region_name="us-west-2")
 
 # Bedrock model selected
 # See supported models:
 # https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features
-modelId = "anthropic.claude-3-sonnet-20240229-v1:0" # Claude Sonnet 3
-# modelId = "anthropic.claude-3-5-sonnet-20240620-v1:0" # Claude Sonnet 3.5
+modelId = "anthropic.claude-3-sonnet-20240229-v1:0"  # Claude Sonnet 3
+# modelId = "anthropic.claude-3-5-sonnet-20241022-v2:0" # Claude Sonnet 3.5
 # modelId = "cohere.command-r-v1:0" # Command R
 # modelId = "cohere.command-r-plus-v1:0" # Command R+
 # modelId = "mistral.mistral-large-2407-v1:0" # Mistral Large
@@ -36,7 +36,7 @@ def generate_text(messages) -> Union[str, list[str], list[dict[str, any]]]:
     :param messages: list of message dicts from the user
     :return: stop reason, list of the tools requested, and the output messages from the model
     """
-    
+
     system_prompt = [{"text": system_text_promot}]
 
     # Using Amazon Bedrock converse API
